@@ -19,9 +19,6 @@
             <ul class="navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Employee List", "Index", "Employees", new { @class = "nav-link" })</li>
-
-                    <li>@Html.ActionLink("Add New Employee", "Create", "Employees", new { @class = "nav-link" })</li>
 
                     <li>@User.Identity.Name</li>
 

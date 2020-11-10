@@ -37,10 +37,15 @@ namespace ProjetCRA.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username, false);
 
                     if (user.Username == "admin") return RedirectToAction("AdminListeEmployes", "Utilisateur");
-                    return RedirectToAction("Login", "Home");
+                    return RedirectToAction("InterfaceUser", "Home");
                 }
             }
             ModelState.AddModelError("", "invalid Username or Password");
+            return View();
+        }
+
+        public ActionResult InterfaceUser()
+        {
             return View();
         }
  
