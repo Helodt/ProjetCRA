@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AdminListeEmployes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Liste des employés</h2>
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+
+            @foreach (var data in ViewBag.listEmployes)
+            {
+                <tr>
+                    <td>@data.MATRICULE</td>
+                    <td>@data.NOM</td>
+                    <td>@data.PRENOM</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

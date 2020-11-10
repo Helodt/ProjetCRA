@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-flatly.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="padding-top: 0px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            @Html.ActionLink("Meliorem", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Employee List", "Index", "Employees", new { @class = "nav-link" })</li>
+
+                    <li>@Html.ActionLink("Add New Employee", "Create", "Employees", new { @class = "nav-link" })</li>
+
+                    <li>@User.Identity.Name</li>
+
+                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link text-center text-uppercase" })</li>
+
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
+
+                    <li>@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
+
+                    <li>@Html.ActionLink("Register", "Register", "Home", new { @class = "nav-link float-left" })</li>
+
+                    <li>@Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link float-left" })</li>
+
+
+
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Meliorem</p>
+        </footer>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>

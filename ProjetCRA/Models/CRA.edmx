@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRA_BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MISSION">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="LIBELLE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="DATE_DEBUT" Type="date" Nullable="false" />
+          <Property Name="DATE_FIN" Type="date" Nullable="false" />
+          <Property Name="ETAT" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="UTILISATEUR_MATRICULE" Type="nchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="MISSIONJOUR">
+          <Key>
+            <PropertyRef Name="IDJOUR" />
+          </Key>
+          <Property Name="IDJOUR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MISSION_CODE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="TEMPS_ACCORDE" Type="int" Nullable="false" />
+          <Property Name="ETAT" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="JOUR" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RAPPORT">
+          <Key>
+            <PropertyRef Name="IDRAPPORT" />
+          </Key>
+          <Property Name="IDRAPPORT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UTILISATEUR_MATRICULE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="MOIS" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="MATRICULE" />
+          </Key>
+          <Property Name="MATRICULE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="MOTDEPASSE" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="NOM" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="PRENOM" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="ISADMIN" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MISSION_UTILISATEUR">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+          <End Role="MISSION" Type="Self.MISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="MATRICULE" />
+            </Principal>
+            <Dependent Role="MISSION">
+              <PropertyRef Name="UTILISATEUR_MATRICULE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MISSIONJOUR_MISSION">
+          <End Role="MISSION" Type="Self.MISSION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MISSIONJOUR" Type="Self.MISSIONJOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MISSION">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="MISSIONJOUR">
+              <PropertyRef Name="MISSION_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAPPORT_UTILISATEUR">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RAPPORT" Type="Self.RAPPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="MATRICULE" />
+            </Principal>
+            <Dependent Role="RAPPORT">
+              <PropertyRef Name="UTILISATEUR_MATRICULE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRA_BDDModelStoreContainer">
+          <EntitySet Name="MISSION" EntityType="Self.MISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MISSIONJOUR" EntityType="Self.MISSIONJOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RAPPORT" EntityType="Self.RAPPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MISSION_UTILISATEUR" Association="Self.FK_MISSION_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MISSION" EntitySet="MISSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MISSIONJOUR_MISSION" Association="Self.FK_MISSIONJOUR_MISSION">
+            <End Role="MISSION" EntitySet="MISSION" />
+            <End Role="MISSIONJOUR" EntitySet="MISSIONJOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAPPORT_UTILISATEUR" Association="Self.FK_RAPPORT_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="RAPPORT" EntitySet="RAPPORT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRA_BDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MISSION">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LIBELLE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DATE_DEBUT" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DATE_FIN" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ETAT" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UTILISATEUR_MATRICULE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="Self.FK_MISSION_UTILISATEUR" FromRole="MISSION" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="MISSIONJOUR" Relationship="Self.FK_MISSIONJOUR_MISSION" FromRole="MISSION" ToRole="MISSIONJOUR" />
+        </EntityType>
+        <EntityType Name="MISSIONJOUR">
+          <Key>
+            <PropertyRef Name="IDJOUR" />
+          </Key>
+          <Property Name="IDJOUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MISSION_CODE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TEMPS_ACCORDE" Type="Int32" Nullable="false" />
+          <Property Name="ETAT" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="JOUR" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MISSION" Relationship="Self.FK_MISSIONJOUR_MISSION" FromRole="MISSIONJOUR" ToRole="MISSION" />
+        </EntityType>
+        <EntityType Name="RAPPORT">
+          <Key>
+            <PropertyRef Name="IDRAPPORT" />
+          </Key>
+          <Property Name="IDRAPPORT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UTILISATEUR_MATRICULE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MOIS" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="Self.FK_RAPPORT_UTILISATEUR" FromRole="RAPPORT" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="MATRICULE" />
+          </Key>
+          <Property Name="MATRICULE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MOTDEPASSE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NOM" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PRENOM" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ISADMIN" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MISSION" Relationship="Self.FK_MISSION_UTILISATEUR" FromRole="UTILISATEUR" ToRole="MISSION" />
+          <NavigationProperty Name="RAPPORT" Relationship="Self.FK_RAPPORT_UTILISATEUR" FromRole="UTILISATEUR" ToRole="RAPPORT" />
+        </EntityType>
+        <Association Name="FK_MISSION_UTILISATEUR">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
+          <End Role="MISSION" Type="Self.MISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="MATRICULE" />
+            </Principal>
+            <Dependent Role="MISSION">
+              <PropertyRef Name="UTILISATEUR_MATRICULE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MISSIONJOUR_MISSION">
+          <End Role="MISSION" Type="Self.MISSION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MISSIONJOUR" Type="Self.MISSIONJOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MISSION">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="MISSIONJOUR">
+              <PropertyRef Name="MISSION_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAPPORT_UTILISATEUR">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RAPPORT" Type="Self.RAPPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="MATRICULE" />
+            </Principal>
+            <Dependent Role="RAPPORT">
+              <PropertyRef Name="UTILISATEUR_MATRICULE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_CRAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MISSION" EntityType="Self.MISSION" />
+          <EntitySet Name="MISSIONJOUR" EntityType="Self.MISSIONJOUR" />
+          <EntitySet Name="RAPPORT" EntityType="Self.RAPPORT" />
+          <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" />
+          <AssociationSet Name="FK_MISSION_UTILISATEUR" Association="Self.FK_MISSION_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="MISSION" EntitySet="MISSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MISSIONJOUR_MISSION" Association="Self.FK_MISSIONJOUR_MISSION">
+            <End Role="MISSION" EntitySet="MISSION" />
+            <End Role="MISSIONJOUR" EntitySet="MISSIONJOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAPPORT_UTILISATEUR" Association="Self.FK_RAPPORT_UTILISATEUR">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="RAPPORT" EntitySet="RAPPORT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRA_BDDModelStoreContainer" CdmEntityContainer="BD_CRAEntities">
+          <EntitySetMapping Name="MISSION">
+            <EntityTypeMapping TypeName="CRA_BDDModel.MISSION">
+              <MappingFragment StoreEntitySet="MISSION">
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="LIBELLE" ColumnName="LIBELLE" />
+                <ScalarProperty Name="DATE_DEBUT" ColumnName="DATE_DEBUT" />
+                <ScalarProperty Name="DATE_FIN" ColumnName="DATE_FIN" />
+                <ScalarProperty Name="ETAT" ColumnName="ETAT" />
+                <ScalarProperty Name="UTILISATEUR_MATRICULE" ColumnName="UTILISATEUR_MATRICULE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MISSIONJOUR">
+            <EntityTypeMapping TypeName="CRA_BDDModel.MISSIONJOUR">
+              <MappingFragment StoreEntitySet="MISSIONJOUR">
+                <ScalarProperty Name="IDJOUR" ColumnName="IDJOUR" />
+                <ScalarProperty Name="MISSION_CODE" ColumnName="MISSION_CODE" />
+                <ScalarProperty Name="TEMPS_ACCORDE" ColumnName="TEMPS_ACCORDE" />
+                <ScalarProperty Name="ETAT" ColumnName="ETAT" />
+                <ScalarProperty Name="JOUR" ColumnName="JOUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RAPPORT">
+            <EntityTypeMapping TypeName="CRA_BDDModel.RAPPORT">
+              <MappingFragment StoreEntitySet="RAPPORT">
+                <ScalarProperty Name="IDRAPPORT" ColumnName="IDRAPPORT" />
+                <ScalarProperty Name="UTILISATEUR_MATRICULE" ColumnName="UTILISATEUR_MATRICULE" />
+                <ScalarProperty Name="MOIS" ColumnName="MOIS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UTILISATEUR">
+            <EntityTypeMapping TypeName="CRA_BDDModel.UTILISATEUR">
+              <MappingFragment StoreEntitySet="UTILISATEUR">
+                <ScalarProperty Name="MATRICULE" ColumnName="MATRICULE" />
+                <ScalarProperty Name="MOTDEPASSE" ColumnName="MOTDEPASSE" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="ISADMIN" ColumnName="ISADMIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

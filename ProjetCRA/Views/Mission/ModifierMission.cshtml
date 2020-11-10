@@ -1,0 +1,65 @@
+﻿@model ProjetCRA.Models.MISSION
+@{
+    ViewBag.Title = "ModifierMission";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Missions en cours</h2>
+<h3>Modifier</h3>
+<br />
+
+@if (Model != null)
+{
+    <div>
+        <form class="form-horizontal" action="" method="post">
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Code :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.CODE" disabled="disabled">
+                    <input type="hidden" class="form-control" id="CODE" name="CODE" value="@Model.CODE">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="LIBELLE">Libellé * :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="LIBELLE" name="LIBELLE" value=@Model.LIBELLE required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="DATE_DEBUT">Date début :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value=@Model.DATE_DEBUT disabled="disabled">
+                    <input type="hidden" class="form-control" id="DATE_DEBUT" name="DATE_DEBUT" value=@Model.DATE_DEBUT>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="DATE_FIN">Date fin * :</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="DATE_FIN" name="DATE_FIN" value=@Model.DATE_FIN required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="UTILISATEUR_MATRICULE">Matricule employé :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value=@Model.UTILISATEUR_MATRICULE disabled="disabled">
+                    <input type="hidden" class="form-control" id="UTILISATEUR_MATRICULE" name="UTILISATEUR_MATRICULE" value=@Model.UTILISATEUR_MATRICULE>
+                </div>
+            </div>
+
+            <input type="hidden" class="form-control" id="ETAT" name="ETAT" value=@Model.ETAT>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" id="ajouterMission" name="modifierMission" value="Modifier" class="btn btn-primary" />
+                    <a href="~/Mission/AdminMissionsEnCours" class="btn btn-default">Retour</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+}

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "AdminListeMissionJourAttenteValidation";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Missions en attente de validation</h2>
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th colspan="2">Mission</th>
+                <th colspan="5">Employé</th>
+            </tr>
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Libellé</th>
+                <th scope="col">Matricule</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Jour</th>
+                <th scope="col">Temps</th>
+                <th scope="col">Terminée</th>
+            </tr>
+
+            @foreach (var data in ViewBag.listMissionsEnAttenteValidation)
+            {
+                <tr>
+                    <td>@data.CodeMission</td>
+                    <td>@data.Libelle</td>
+                    <td>@data.Matricule</td>
+                    <td>@data.Nom</td>
+                    <td>@data.Prenom</td>
+                    <td>@data.Jour</td>
+                    <td>@data.Temps</td>
+                    <td></td>
+                    <td>
+                        <a href="~/MissionJour/AccepterMissionJour/@data.CodeMissionJour" class="btn btn-success">Accepter</a>
+                        <a href="~/MissionJour/RefuserMissionJour/@data.CodeMissionJour" class="btn btn-danger">Refuser</a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "AdminMissionsEnCours";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Missions en cours</h2>
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <a href="~/Mission/AjouterMission" class="btn btn-primary">Ajouter une mission</a>
+    </div>
+</div>
+
+<br/>
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th colspan="2">Mission</th>
+                <th colspan="5">Employé</th>
+            </tr>
+
+            <tr>
+                <th>Code</th>
+                <th>Libellé</th>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Du</th>
+                <th>Au</th>
+            </tr>
+
+            @foreach (var data in ViewBag.listMissionsEnCours)
+            {
+                <tr>
+                    <td>@data.Code</td>
+                    <td>@data.Libelle</td>
+                    <td>@data.Matricule</td>
+                    <td>@data.Nom</td>
+                    <td>@data.Prenom</td>
+                    <td>@data.DateDebut</td>
+                    <td>@data.DateFin</td>
+                    <td>
+                        <a href="~/Mission/ModifierMission/@data.Code" class="btn btn-primary">Modifier</a>
+                        <a href="~/Mission/ArchiverMission/@data.Code" class="btn btn-primary">Archiver</a>
+                        <a href="~/Mission/SupprimerMission/@data.Code" class="btn btn-danger">Supprimer</a>
+                    </td>
+
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+</div>
+
