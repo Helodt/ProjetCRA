@@ -1,10 +1,13 @@
 ﻿using ProjetCRA.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Windows.Forms;
+using Developpez.Dotnet;
 
 namespace ProjetCRA.Controllers
 {
@@ -46,6 +49,16 @@ namespace ProjetCRA.Controllers
 
         public ActionResult InterfaceUser()
         {
+            int numsemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            DateTime lundiSemaineCourante = DateExtensions.GetStartOfWeek(2020, numsemaine);
+            DateTime mardiSemaineCourante = lundiSemaineCourante.AddDays(1);
+            DateTime mercrediSemaineCourante = lundiSemaineCourante.AddDays(2);
+            DateTime jeudiSemaineCourante = lundiSemaineCourante.AddDays(3);
+            DateTime vendrediSemaineCourante = lundiSemaineCourante.AddDays(4);
+            DateTime samediSemaineCourante = lundiSemaineCourante.AddDays(5);
+            DateTime dimancheSemaineCourante = lundiSemaineCourante.AddDays(6);
+
+            //MessageBox.Show(User.Identity.Name);
             return View();
         }
  

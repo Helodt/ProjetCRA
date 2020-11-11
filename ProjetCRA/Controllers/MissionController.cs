@@ -24,6 +24,12 @@ namespace ProjetCRA.Controllers
         #region Listes des missions en cours
         public ActionResult AdminMissionsEnCours()
         {
+            using (DAL dal = new DAL())
+            {
+                ViewBag.listMissionsEnCours = dal.ObtenirListeMissionsEnCours();
+                return View();
+            }
+            /*
             // Récupérer la liste des missions en cours :
             try
             {
@@ -48,7 +54,8 @@ namespace ProjetCRA.Controllers
             catch (Exception e)
             {
                 return HttpNotFound();
-            }
+            }*/
+
         }
         #endregion
 
@@ -68,12 +75,28 @@ namespace ProjetCRA.Controllers
         [HttpPost]
         public ActionResult AjouterMission(MISSION mission)
         {
+            using (DAL dal = new DAL())
+            {
+                Boolean missionAjoutée = dal.AjouterMission(mission);
+                if (missionAjoutée == true)
+                {
+                    MessageBox.Show("La mission a bien été ajoutée", "Succès");
+                    return RedirectToAction("AdminMissionsEnCours");
+                }
+                else
+                {
+                    MessageBox.Show("La mission n'a pas pu être ajoutée : données invalides ", "Erreur");
+                    return RedirectToAction("AjouterMission");
+                }
+            }
+
+            /*
             try
             {
                 if (ModelState.IsValid) //Si le modèle est valide
                 {
-                    mission.ETAT = "EnCours"; // L'état de la mission est initialisée à "EnCours"
                     if (mission.DATE_DEBUT > mission.DATE_FIN) throw new Exception(); // La Date de fin doit être > à la date de début
+                    mission.ETAT = "EnCours"; // L'état de la mission est initialisée à "EnCours"
                     db.MISSION.Add(mission); // Ajout de la mission dans la BDD
                     db.SaveChanges(); // Sauvegarder les changements dans la BDD
                     MessageBox.Show("La mission a bien été ajoutée", "Succès");
@@ -86,7 +109,7 @@ namespace ProjetCRA.Controllers
             {
                 MessageBox.Show("La mission n'a pas pu être ajoutée : données invalides ", "Erreur");
                 return RedirectToAction("AjouterMission");
-            }
+            }*/
 
         }
         #endregion
@@ -94,7 +117,14 @@ namespace ProjetCRA.Controllers
         #region Modifier une mission
         public ActionResult ModifierMission(string id)
         {
-            try
+            using (DAL dal = new DAL())
+            {
+                MISSION mission = dal.MissionExiste(id);
+                if (mission != null) return View("ModifierMission", mission);
+                else return RedirectToAction("AdminMissionsEnCours");
+            }
+            
+            /*try
             {
                 // Rechercher la mission dans la BDD :
                 MISSION mission = db.MISSION.Find(id);
@@ -109,7 +139,7 @@ namespace ProjetCRA.Controllers
             catch (Exception e)
             {
                 return RedirectToAction("AdminMissionsEnCours");
-            }
+            }*/
 
         }
 
@@ -150,6 +180,23 @@ namespace ProjetCRA.Controllers
         #region Supprimer une mission
         public ActionResult SupprimerMission(string id)
         {
+            using (DAL dal = new DAL())
+            {
+                // Demander confirmation à l'user pour réaliser la suppression :
+                DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer la mission " + id + " ?", "Supprimer la mission", MessageBoxButtons.YesNo);
+
+                // Si OK pour la suppression de la mission :
+                if (result == DialogResult.Yes)
+                {
+                    Boolean MissionSupprimee = dal.SupprimerMission(id);
+                    if (MissionSupprimee) MessageBox.Show("La mission a bien été supprimée", "Succès");
+                    else MessageBox.Show("La mission n'a pas pu être supprimée", "Echec");
+                }
+                return RedirectToAction("AdminMissionsEnCours");
+            }
+
+
+            /*
             // Demander confirmation à l'user pour réaliser la suppression :
             DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer la mission " + id + " ?", "Supprimer la mission", MessageBoxButtons.YesNo);
 
@@ -176,7 +223,7 @@ namespace ProjetCRA.Controllers
                     return RedirectToAction("AdminMissionsEnCours");
                 }
             }
-            else return RedirectToAction("AdminMissionsEnCours");
+            else return RedirectToAction("AdminMissionsEnCours");*/
 
         }
         #endregion
@@ -184,6 +231,21 @@ namespace ProjetCRA.Controllers
         #region Archiver une mission
         public ActionResult ArchiverMission(string id)
         {
+            using (DAL dal = new DAL())
+            {
+                // Demander confirmation à l'user pour réaliser l'achivage :
+                DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir archiver la mission " + id + " ?", "Archiver la mission", MessageBoxButtons.YesNo);
+
+                // Si OK pour l'archivage de la mission :
+                if (result == DialogResult.Yes)
+                {
+                    if (dal.ArchiverMission(id)) MessageBox.Show("La mission a été archivée", "Succès");
+                    else MessageBox.Show("La mission n'a pas pu être archivée", "Echec");
+                }
+                return RedirectToAction("AdminMissionsEnCours");
+            }
+
+            /*
             // Demander confirmation à l'user pour réaliser l'achivage :
             DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir archiver la mission " + id + " ?", "Archiver la mission", MessageBoxButtons.YesNo);
 
@@ -201,17 +263,7 @@ namespace ProjetCRA.Controllers
                     }
                     return RedirectToAction("AdminMissionsEnCours");
                 }
-                /*catch (DbEntityValidationException ex)
-                {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage + "\n");
-                        }
-                    }
-                    return RedirectToAction("AdminMissionsEnCours");
-                }*/
+                
                 catch (Exception e)
                 {
                     MessageBox.Show("La mission n'a pas pu être archivée", "Echec");
@@ -219,6 +271,7 @@ namespace ProjetCRA.Controllers
                 }
             }
             else return RedirectToAction("AdminMissionsEnCours");
+            */
         }
         #endregion
 
@@ -228,7 +281,13 @@ namespace ProjetCRA.Controllers
         #region Liste des missions archivées
         public ActionResult AdminMissionsArchivées()
         {
-            try
+            using (DAL dal = new DAL())
+            {
+                ViewBag.listMissionsArchivées = dal.ListeMissionsArchivées();
+                return View();
+            }
+            
+            /*try
             {
 
                 // Sélectionner toutes les missions dont l'état est "Archivé", et faire le total du temps des missionJours associées (seulement les missionsJour dont l'état est "Accepté")
@@ -279,7 +338,7 @@ namespace ProjetCRA.Controllers
             catch (Exception e)
             {
                 return HttpNotFound();
-            }
+            }*/
             
         }
         #endregion
@@ -287,31 +346,47 @@ namespace ProjetCRA.Controllers
         #region Désarchiver une mission
         public ActionResult DesarchiverMission(string id)
         {
-            // Demander confirmation à l'user pour réaliser l'achivage :
-            DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir désarchiver la mission " + id + " ?", "Désarchiver la mission", MessageBoxButtons.YesNo);
-
-            // Si OK pour l'archivage de la mission :
-            if (result == DialogResult.Yes)
+            using (DAL dal = new DAL())
             {
-                try
+                // Demander confirmation à l'user pour réaliser l'achivage :
+                DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir désarchiver la mission " + id + " ?", "Désarchiver la mission", MessageBoxButtons.YesNo);
+
+                // Si OK pour l'archivage de la mission :
+                if (result == DialogResult.Yes)
                 {
-                    MISSION mission = db.MISSION.Find(id); // Rechercher la mission dans la BDD
-                    if (mission != null) // Si la mission existe
-                    {
-                        mission.ETAT = "EnCours";
-                        db.SaveChanges();
-                        MessageBox.Show("La mission a été désarchivée", "Succès");
-                    }
-                    return RedirectToAction("AdminMissionsArchivées");
+                    if (dal.DesarchiverMission(id)) MessageBox.Show("La mission a été désarchivée", "Succès");
+                    else MessageBox.Show("La mission n'a pas pu être désarchivée", "Echec");
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show("La mission n'a pas pu être désarchivée", "Echec");
-                    return RedirectToAction("AdminMissionsArchivées");
-                }
+                return RedirectToAction("AdminMissionsArchivées");
             }
-            else return RedirectToAction("AdminMissionsArchivées");
         }
+
+        /*
+        // Demander confirmation à l'user pour réaliser l'achivage :
+        DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir désarchiver la mission " + id + " ?", "Désarchiver la mission", MessageBoxButtons.YesNo);
+
+        // Si OK pour l'archivage de la mission :
+        if (result == DialogResult.Yes)
+        {
+            try
+            {
+                MISSION mission = db.MISSION.Find(id); // Rechercher la mission dans la BDD
+                if (mission != null) // Si la mission existe
+                {
+                    mission.ETAT = "EnCours";
+                    db.SaveChanges();
+                    MessageBox.Show("La mission a été désarchivée", "Succès");
+                }
+                return RedirectToAction("AdminMissionsArchivées");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("La mission n'a pas pu être désarchivée", "Echec");
+                return RedirectToAction("AdminMissionsArchivées");
+            }
+        }
+        else return RedirectToAction("AdminMissionsArchivées");
+    }*/
         #endregion
         #endregion
     }

@@ -22,7 +22,13 @@ namespace ProjetCRA.Controllers
 
         public ActionResult AdminListeEmployes()
         {
-            try
+            using (DAL dal = new DAL())
+            {
+                ViewBag.listEmployes = db.UTILISATEUR.ToList();
+                return View();
+            }
+
+            /*try
             {
                 ViewBag.listEmployes = db.UTILISATEUR.ToList();
                 return View();
@@ -30,7 +36,7 @@ namespace ProjetCRA.Controllers
             catch (Exception e)
             {
                 return HttpNotFound();
-            }
+            }*/
         }
     }
 }

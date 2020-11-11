@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Developpez.Dotnet, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\dvp-net.0.6.1\lib\net40\Developpez.Dotnet.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -164,6 +167,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CRA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAL.cs" />
     <Compile Include="Models\MISSION.cs">
       <DependentUpon>CRA.tt</DependentUpon>
     </Compile>
@@ -173,6 +177,7 @@
     <Compile Include="Models\MissionsArchivéesView.cs" />
     <Compile Include="Models\MissionsEnCoursView.cs" />
     <Compile Include="Models\MissionsJoursAttenteValidationView.cs" />
+    <Compile Include="Models\MissionsJourUserView.cs" />
     <Compile Include="Models\RAPPORT.cs">
       <DependentUpon>CRA.tt</DependentUpon>
     </Compile>

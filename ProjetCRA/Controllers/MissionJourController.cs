@@ -20,7 +20,14 @@ namespace ProjetCRA.Controllers
         #region Liste des missions en Attente de Validation
         public ActionResult AdminListeMissionJourAttenteValidation()
         {
-            try
+
+            using (DAL dal = new DAL())
+            {
+                ViewBag.listMissionsEnAttenteValidation = dal.ListeMissionsEnAttenteValidation();
+                return View();
+            }
+            
+            /*try
             {
                 var query = from mj in db.MISSIONJOUR
                             join m in db.MISSION on mj.MISSION_CODE equals m.CODE
@@ -44,53 +51,63 @@ namespace ProjetCRA.Controllers
             catch (Exception e)
             {
                 return HttpNotFound();
-            }
+            }*/
         }
         #endregion
 
         #region Accepter une missionJour
         public ActionResult AccepterMissionJour(int id)
         {
-            {
-                try
-                {
-                    MISSIONJOUR mission = db.MISSIONJOUR.Find(id); // Rechercher la mission dans la BDD
-                    if (mission != null) // Si la mission existe
-                    {
-                        mission.ETAT = "Accepté";
-                        db.SaveChanges();
 
-                    }
-                    return RedirectToAction("AdminListeMissionJourAttenteValidation");
-                }
-                catch (Exception e)
-                {
-                    return RedirectToAction("AdminListeMissionJourAttenteValidation");
-                }
+            using (DAL dal = new DAL())
+            {
+                dal.AccepterMissionJour(id);
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
             }
+            /*try
+            {
+                MISSIONJOUR mission = db.MISSIONJOUR.Find(id); // Rechercher la mission dans la BDD
+                if (mission != null) // Si la mission existe
+                {
+                    mission.ETAT = "Accepté";
+                    db.SaveChanges();
+
+                }
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
+            }*/
+
         }
         #endregion
 
         #region Refuser une missionJour
         public ActionResult RefuserMissionJour(int id)
         {
+            using (DAL dal = new DAL())
             {
-                try
-                {
-                    MISSIONJOUR mission = db.MISSIONJOUR.Find(id); // Rechercher la mission dans la BDD
-                    if (mission != null) // Si la mission existe
-                    {
-                        mission.ETAT = "Refusé";
-                        db.SaveChanges();
-
-                    }
-                    return RedirectToAction("AdminListeMissionJourAttenteValidation");
-                }
-                catch (Exception e)
-                {
-                    return RedirectToAction("AdminListeMissionJourAttenteValidation");
-                }
+                dal.RefuserMissionJour(id);
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
             }
+            /*
+            try
+            {
+                MISSIONJOUR mission = db.MISSIONJOUR.Find(id); // Rechercher la mission dans la BDD
+                if (mission != null) // Si la mission existe
+                {
+                    mission.ETAT = "Refusé";
+                    db.SaveChanges();
+
+                }
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("AdminListeMissionJourAttenteValidation");
+            }*/
+            
         }
 
         #endregion
