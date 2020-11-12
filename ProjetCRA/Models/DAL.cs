@@ -207,7 +207,7 @@ namespace ProjetCRA.Models
         }
 
         // Liste les missions en attente de validation :
-        public List<MissionsJoursAttenteValidationView> ListeMissionsEnAttenteValidation()
+        public List<MissionsJourUserView> ListeMissionsEnAttenteValidation()
         {
             try
             {
@@ -215,7 +215,7 @@ namespace ProjetCRA.Models
                             join m in db.MISSION on mj.MISSION_CODE equals m.CODE
                             join u in db.UTILISATEUR on m.UTILISATEUR_MATRICULE equals u.MATRICULE
                             where mj.ETAT == "EnAttenteValidation"
-                            select new MissionsJoursAttenteValidationView()
+                            select new MissionsJourUserView()
                             {
                                 CodeMissionJour = mj.IDJOUR,
                                 CodeMission = m.CODE,
@@ -224,7 +224,8 @@ namespace ProjetCRA.Models
                                 Nom = u.NOM,
                                 Prenom = u.PRENOM,
                                 Jour = mj.JOUR,
-                                Temps = mj.TEMPS_ACCORDE
+                                Temps = mj.TEMPS_ACCORDE,
+                                EtatMissionJour = mj.ETAT
                             };
 
                 return query.Distinct().ToList();
@@ -281,9 +282,32 @@ namespace ProjetCRA.Models
             }
         }
 
-
-        public List<MissionsJourUserView> ListeMissionsJoursParJourParUser()
+        // Récupère la liste des missionsJour d'un utilisateur pour une journée donnée
+        public List<MissionsJourUserView> ListeMissionsJoursPourJourPourUser(string matricule, DateTime Jour)
         {
+            try
+            {
+                var query = from mj in db.MISSIONJOUR
+                            join m in db.MISSION on mj.MISSION_CODE equals m.CODE
+                            where mj.JOUR == Jour
+                            where m.UTILISATEUR_MATRICULE == matricule
+                            select new MissionsJourUserView()
+                            {
+                                CodeMissionJour = mj.IDJOUR,
+                                CodeMission = mj.MISSION_CODE,
+                                Libelle = m.LIBELLE,
+                                Matricule = matricule,
+                                Nom = "",
+                                Prenom = "",
+                                Jour = Jour,
+                                Temps = mj.TEMPS_ACCORDE
+                            };
+
+                return query.Distinct().ToList();
+            } catch(Exception e)
+            {
+
+            }
             return null;
         }
             

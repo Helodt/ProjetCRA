@@ -176,7 +176,6 @@
     </Compile>
     <Compile Include="Models\MissionsArchivéesView.cs" />
     <Compile Include="Models\MissionsEnCoursView.cs" />
-    <Compile Include="Models\MissionsJoursAttenteValidationView.cs" />
     <Compile Include="Models\MissionsJourUserView.cs" />
     <Compile Include="Models\RAPPORT.cs">
       <DependentUpon>CRA.tt</DependentUpon>

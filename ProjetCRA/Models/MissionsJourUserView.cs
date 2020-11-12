@@ -15,7 +15,7 @@ namespace ProjetCRA.Models
         public string Prenom { get; set; }
         public DateTime Jour { get; set; }
         public int Temps { get; set; }
-        public string Etat { get; set; }
+        public string EtatMissionJour { get; set; }
     }
 
 }
