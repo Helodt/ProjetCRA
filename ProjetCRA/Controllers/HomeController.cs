@@ -41,14 +41,17 @@ namespace ProjetCRA.Controllers
                     FormsAuthentication.SetAuthCookie(user.Username, false);
 
                     if (user.Username == "admin") return RedirectToAction("AdminListeEmployes", "Utilisateur");
-                    return RedirectToAction("InterfaceUser", "Home");
+
+                    int numsemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                    return RedirectToAction($"InterfaceUser/{numsemaine}", "Home");
                 }
             }
             ModelState.AddModelError("", "invalid Username or Password");
             return View();
         }
 
-        public ActionResult InterfaceUser()
+        // Permet de contrôler l'affichage de la semaine utilisateur par défaut
+        /*public ActionResult InterfaceUser()
         {
             using (DAL dal = new DAL())
             {
@@ -62,12 +65,65 @@ namespace ProjetCRA.Controllers
                 ViewBag.Vendredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(4));
                 ViewBag.Samedi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(5));
                 ViewBag.Dimanche = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(6));
+
+                ViewBag.numsemaine = numsemaine;
             }
-            
-            //MessageBox.Show(User.Identity.Name);
+            return View();*/
+
+            //A METTRE DANS LA VUE :
+            /*
+             @{
+                int semaineSuivante = (int)ViewBag.numsemaine +1;
+                int semainePrecedente = (int)ViewBag.numsemaine - 1;
+              }
+             */
+        //}
+
+
+        // Permet de contôler l'affichage de la semaine utilisateur lorsqu'il modifie la semaine à afficher.
+        // id = le numéro de la semaine à afficher.
+        public ActionResult InterfaceUser(int id)
+        {
+            using (DAL dal = new DAL())
+            {
+                DateTime lundiSemaineCourante = DateExtensions.GetStartOfWeek(2020, id);
+
+                ViewBag.Lundi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante);
+                ViewBag.Mardi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(1));
+                ViewBag.Mercredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(2));
+                ViewBag.Jeudi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(3));
+                ViewBag.Vendredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(4));
+                ViewBag.Samedi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(5));
+                ViewBag.Dimanche = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(6));
+
+                ViewBag.numsemaine = id;
+            }
             return View();
         }
- 
+
+        // A METTRE DANS LA VUE :
+        /*
+        @{
+            if (ViewBag.listMissionsEnCours.Count != 0)
+            {
+                var missionCode = ViewBag.listMissionsEnCours?[0]?.Code;
+                 // Afficher le bouton "Valider la journée", qui prend en id la missionCode
+            }
+        }
+        @missionCode
+
+
+        @{
+            if (ViewBag.Lundi.Count != 0)
+            {
+                var missionCode = ViewBag.Lundi?[0]?.CodeMissionJour;
+                // Afficher le bouton "Valider la journée", qui prend en id le CodeMissionJour
+            }
+        }
+
+        */
+
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
