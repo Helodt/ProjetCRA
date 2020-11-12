@@ -117,7 +117,7 @@ namespace ProjetCRA.Controllers
             if (ViewBag.Lundi.Count != 0)
             {
                 var missionCode = ViewBag.Lundi?[0]?.CodeMissionJour;
-                // Afficher le bouton "Valider la journée", qui prend en id le CodeMissionJour
+                // Afficher le bouton "Valider la journée", qui prend en id le missionCode
             }
         }
 
