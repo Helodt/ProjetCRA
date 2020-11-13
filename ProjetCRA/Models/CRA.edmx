@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CRA_BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CRA_BDDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MISSION">
           <Key>
             <PropertyRef Name="CODE" />
@@ -22,7 +22,7 @@
           </Key>
           <Property Name="IDJOUR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MISSION_CODE" Type="nchar" MaxLength="40" Nullable="false" />
-          <Property Name="TEMPS_ACCORDE" Type="int" Nullable="false" />
+          <Property Name="TEMPS_ACCORDE" Type="float" Nullable="false" />
           <Property Name="ETAT" Type="nchar" MaxLength="40" Nullable="false" />
           <Property Name="JOUR" Type="date" Nullable="false" />
         </EntityType>
@@ -102,8 +102,7 @@
             <End Role="RAPPORT" EntitySet="RAPPORT" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CRA_BDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -126,10 +125,10 @@
           </Key>
           <Property Name="IDJOUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MISSION_CODE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="TEMPS_ACCORDE" Type="Int32" Nullable="false" />
           <Property Name="ETAT" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="JOUR" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="MISSION" Relationship="Self.FK_MISSIONJOUR_MISSION" FromRole="MISSIONJOUR" ToRole="MISSION" />
+          <Property Name="TEMPS_ACCORDE" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="RAPPORT">
           <Key>
@@ -231,9 +230,9 @@
           <EntitySetMapping Name="MISSIONJOUR">
             <EntityTypeMapping TypeName="CRA_BDDModel.MISSIONJOUR">
               <MappingFragment StoreEntitySet="MISSIONJOUR">
+                <ScalarProperty Name="TEMPS_ACCORDE" ColumnName="TEMPS_ACCORDE" />
                 <ScalarProperty Name="IDJOUR" ColumnName="IDJOUR" />
                 <ScalarProperty Name="MISSION_CODE" ColumnName="MISSION_CODE" />
-                <ScalarProperty Name="TEMPS_ACCORDE" ColumnName="TEMPS_ACCORDE" />
                 <ScalarProperty Name="ETAT" ColumnName="ETAT" />
                 <ScalarProperty Name="JOUR" ColumnName="JOUR" />
               </MappingFragment>

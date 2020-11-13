@@ -168,12 +168,14 @@
       <DependentUpon>CRA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DAL.cs" />
+    <Compile Include="Models\DateView.cs" />
     <Compile Include="Models\MISSION.cs">
       <DependentUpon>CRA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MISSIONJOUR.cs">
       <DependentUpon>CRA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MissionJourJourneeUser.cs" />
     <Compile Include="Models\MissionsArchivéesView.cs" />
     <Compile Include="Models\MissionsEnCoursView.cs" />
     <Compile Include="Models\MissionsJourUserView.cs" />
@@ -205,6 +207,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Home\InterfaceUser.cshtml" />
+    <Content Include="Views\MissionJour\AjouterMissionJour.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

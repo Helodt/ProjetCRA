@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -112,5 +113,53 @@ namespace ProjetCRA.Controllers
 
         #endregion
 
+        #region Ajouter une missionJour (côté User)
+        public ActionResult AjouterMissionJour(DateView dateUserMissionjour)
+        {
+            using (DAL dal = new DAL())
+            {
+                ViewBag.dateJour = dateUserMissionjour.DateJour;
+                ViewBag.numSemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(dateUserMissionjour.DateJour, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                // Récupérer la liste des missions en cours que l'utilisateur peut choisir pour le jour sélectionné :
+                ViewBag.MissionsDisponibles = dal.MissionsDisponiblesJourUser(dateUserMissionjour.DateJour, User.Identity.Name);
+
+            }
+
+            return View("AjouterMissionJour");
+        }
+
+        [HttpPost]
+        public ActionResult AjouterMissionJourX(MISSIONJOUR mission)
+        {
+            using (DAL dal = new DAL())
+            {
+                if (mission.TEMPS_ACCORDE > 1)
+                {
+                    MessageBox.Show("Le temps accordé à la mission doit être compris entre 0 et 1", "Echec");
+                }
+                
+                Boolean missionJourAjoutée = dal.AjouterMissionJour(mission);
+                if (missionJourAjoutée == true)
+                {
+                    MessageBox.Show("Mission ajoutée", "Succès");
+                } else
+                {
+                    MessageBox.Show("Echec lors de l'ajout de la mission", "Echec");
+                }
+
+            }
+            return RedirectToAction("InterfaceUser", "Home", new { id = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday) });
+        }
+        #endregion
+
+        #region Envoyer une journée à validation (côté User)
+        public ActionResult EnvoyerJourneeValidation(DateView dateUserMissionjour)
+        {
+            MessageBox.Show("Envoyer à validation ?");
+            int numsemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(dateUserMissionjour.DateJour, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            return RedirectToAction($"InterfaceUser/{numsemaine}", "Home");
+        }
+        #endregion
     }
 }

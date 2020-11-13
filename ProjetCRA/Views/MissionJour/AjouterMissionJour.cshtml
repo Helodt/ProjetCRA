@@ -1,0 +1,82 @@
+﻿@model ProjetCRA.Models.MISSIONJOUR
+
+
+@{
+    ViewBag.Title = "AjouterMissionJour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter une mission dans le calendrier</h2>
+
+
+<div>
+    <form class="form-horizontal" action="/MissionJour/AjouterMissionJourX" method="post">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="MISSION_CODE">Code mission :</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="MISSION_CODE" name="MISSION_CODE">
+                    @foreach (var data in ViewBag.MissionsDisponibles)
+                    {
+                        <option>@data.Code</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="TEMPS_ACCORDE">Temps accordé * :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="TEMPS_ACCORDE" name="TEMPS_ACCORDE" required>
+            </div>
+        </div>
+
+
+        <input type="hidden" class="form-control" id="ETAT" name="ETAT" value="NonSauvegardé">
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="JOUR">Date :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" value=@ViewBag.dateJour disabled="disabled">
+                <input type="hidden" class="form-control" id="JOUR" name="JOUR" value=@ViewBag.dateJour>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" id="ajouterMission" name="ajouterMission" value="Ajouter" class="btn btn-primary" />
+                <a href="~/Home/InterfaceUser/@ViewBag.numSemaine" class="btn btn-default">Retour</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<br/>
+<br/>
+
+<h3>Liste des missions disponibles</h3>
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Code</th>
+                <th>Libellé</th>
+                <th>Du</th>
+                <th>Au</th>
+            </tr>
+
+            @foreach (var data in ViewBag.MissionsDisponibles)
+            {
+                <tr>
+                    <td>@data.Code</td>
+                    <td>@data.Libelle</td>
+                    <td>@data.DateDebut</td>
+                    <td>@data.DateFin</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

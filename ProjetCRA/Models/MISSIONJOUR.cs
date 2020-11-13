@@ -16,9 +16,9 @@ namespace ProjetCRA.Models
     {
         public int IDJOUR { get; set; }
         public string MISSION_CODE { get; set; }
-        public int TEMPS_ACCORDE { get; set; }
         public string ETAT { get; set; }
         public System.DateTime JOUR { get; set; }
+        public double TEMPS_ACCORDE { get; set; }
     
         public virtual MISSION MISSION { get; set; }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Windows.Forms;
 
 namespace ProjetCRA.Models
 {
@@ -310,6 +311,76 @@ namespace ProjetCRA.Models
             }
             return null;
         }
-            
+
+        // Récupère la liste des missions disponibles pour un jour donné, pour un utilisateur
+        public List<MissionsEnCoursView> MissionsDisponiblesJourUser(DateTime date, string matricule)
+        {
+            try
+            {
+                var query = from m in db.MISSION
+                            where m.ETAT == "EnCours"
+                            where m.DATE_DEBUT < date
+                            where m.DATE_FIN > date
+                            where m.UTILISATEUR_MATRICULE == matricule
+                            select new MissionsEnCoursView()
+                            {
+                                Code = m.CODE,
+                                Libelle = m.LIBELLE,
+                                DateDebut = m.DATE_DEBUT,
+                                DateFin = m.DATE_FIN,
+                                Matricule = m.UTILISATEUR_MATRICULE
+                            };
+                return query.Distinct().ToList();
+            } catch (Exception e)
+            {
+
+            }
+            return null;
+        }
+
+        // Ajoute une missionJour dans la BDD
+        public Boolean AjouterMissionJour(MISSIONJOUR mission)
+        {
+            Boolean missionAjoutée = true;
+            try
+            {
+                mission.ETAT = "NonSauvegardé"; // L'état de la mission est initialisée à "NonSauvegardé"
+                db.MISSIONJOUR.Add(mission); // Ajout de la mission dans la BDD
+                db.SaveChanges(); // Sauvegarder les changements dans la BDD
+            }
+            catch (Exception e)
+            {
+                missionAjoutée = false;
+            }
+
+            return missionAjoutée;
+        }
+
+
+        public Boolean VerifierJourneeValidation(DateTime date, string matricule)
+        {
+            /*try
+            {
+                // Récupérer toutes les Missions Jours de la journée date :
+                var query = from mj in db.MISSIONJOUR
+                            join m in db.MISSION on mj.MISSION_CODE equals m.CODE
+                            where mj.JOUR == date
+                            where m.UTILISATEUR_MATRICULE == matricule
+                            
+                            select new MissionJourJourneeUser()
+                            {
+                                CodeMissionJour = mj.IDJOUR,
+                                Temps = mj.TEMPS_ACCORDE,
+                                EtatMissionJour = mj.ETAT
+                            };
+
+                return query.Distinct().ToList();
+            } catch (Exception e)
+            {
+
+            }*/
+            return false;
+        }
+
     }
 }

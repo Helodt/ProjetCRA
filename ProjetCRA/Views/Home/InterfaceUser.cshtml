@@ -1,7 +1,35 @@
-﻿
+﻿@model ProjetCRA.Models.DateView
 @{
     ViewBag.Title = "InterfaceUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>InterfaceUser</h2>
+
+
+<form method="post" action="/MissionJour/AjouterMissionJour">
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        <div class="form-group">
+            <input id="DateJour" name="DateJour" type="hidden" value=@ViewBag.LundiDate />
+            <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Ajouter" class="btn btn-primary"/>
+        </div>
+    </div>
+</form>
+
+
+<form method="post" action="/MissionJour/EnvoyerJourneeValidation">
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        <div class="form-group">
+            <input id="DateJour" name="DateJour" type="hidden" value=@ViewBag.LundiDate />
+            <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Envoyer" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

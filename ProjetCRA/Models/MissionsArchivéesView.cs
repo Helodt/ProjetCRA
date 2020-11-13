@@ -12,6 +12,6 @@ namespace ProjetCRA.Models
         public string Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public int TempsTotal { get; set; }
+        public double TempsTotal { get; set; }
     }
 }
