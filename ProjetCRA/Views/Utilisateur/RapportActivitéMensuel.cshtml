@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "RapportActivitéMensuel";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Rapport d'activité mensuel</h2>
+
+<div class="row align-items-center justify-content-center">
+    <table>
+        <tr>
+            <td>
+                <form method="post" action="/Utilisateur/RapportActivitéMensuel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                        <div class="form-group">
+                            <input id="Matricule" name="Matricule" type="hidden" value=@ViewBag.Matricule />
+                            <input id="Nom" name="Nom" type="hidden" value=@ViewBag.Nom />
+                            <input id="Prenom" name="Prenom" type="hidden" value=@ViewBag.Prenom />
+                            <input id="JourMois" name="JourMois" type="hidden" value=@ViewBag.JourMoisPrecedent />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Mois précédent" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </td>
+
+            <td style="text-transform: capitalize;"><h3>@ViewBag.MoisActuel</h3></td>
+            <td>
+                <form method="post" action="/Utilisateur/RapportActivitéMensuel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                        <div class="form-group">
+                            <input id="Matricule" name="Matricule" type="hidden" value=@ViewBag.Matricule />
+                            <input id="Nom" name="Nom" type="hidden" value=@ViewBag.Nom />
+                            <input id="Prenom" name="Prenom" type="hidden" value=@ViewBag.Prenom />
+                            <input id="JourMois" name="JourMois" type="hidden" value=@ViewBag.JourMoisSuivant />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Mois suivant" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<div style="text-align:center">
+    <b>Matricule</b> : @ViewBag.Matricule <br />
+    <b>Nom</b> : @ViewBag.Nom <br />
+    <b>Prénom</b> : @ViewBag.Prenom <br />
+</div>
+
+
+
+
+
+
+
+<br/>
+<b>Missions du mois :</b> <br/>
+
+<div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Libellé</th>
+                <th scope="col">Temps total</th>
+            </tr>
+
+            @foreach (var data in ViewBag.ListeMissionsMois)
+            {
+                <tr>
+
+                    <td>@data.Code</td>
+                    <td>@data.Libelle</td>
+                    <td>@data.TempsTotal</td>
+
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+</div>
+
+
+<br/>
+<a href="~/Utilisateur/AdminListeEmployes" class="btn btn-default">Retour</a>

@@ -30,75 +30,40 @@ namespace ProjetCRA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserModel user)
         {
-            if (ModelState.IsValid)
-            {
-                bool IsValidUser = _dbContext.UTILISATEUR
-               .Any(u => u.MATRICULE == user.Username && 
-               user.Password == u.MOTDEPASSE);
-
-                if (IsValidUser)
-                {
-                    FormsAuthentication.SetAuthCookie(user.Username, false);
-
-                    if (user.Username == "admin") return RedirectToAction("AdminListeEmployes", "Utilisateur");
-
-                    int numsemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-                    return RedirectToAction($"InterfaceUser/{numsemaine}", "Home");
-                }
-            }
-            ModelState.AddModelError("", "invalid Username or Password");
-            return View();
-        }
-
-        // Permet de contrôler l'affichage de la semaine utilisateur par défaut
-        /*public ActionResult InterfaceUser()
-        {
             using (DAL dal = new DAL())
             {
-                int numsemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-                DateTime lundiSemaineCourante = DateExtensions.GetStartOfWeek(2020, numsemaine);
-                
-                ViewBag.Lundi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante);
-                ViewBag.Mardi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(1));
-                ViewBag.Mercredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(2));
-                ViewBag.Jeudi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(3));
-                ViewBag.Vendredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(4));
-                ViewBag.Samedi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(5));
-                ViewBag.Dimanche = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(6));
+                if (ModelState.IsValid)
+                {
+                    bool IsValidUser = _dbContext.UTILISATEUR.Any(u => u.MATRICULE == user.Username && user.Password == u.MOTDEPASSE);
 
-                ViewBag.numsemaine = numsemaine;
+                    if (IsValidUser)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.Username, false);
+
+                        // Vérifier que l'utilisateur est bien un administrateur :
+                        bool isAdmin = dal.RecupererRole(user.Username);
+                        if (isAdmin == true) return RedirectToAction("AdminListeEmployes", "Utilisateur"); // Aller vers la vue Admin
+
+                        return RedirectToAction("InterfaceUser", "Home", new { id = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday) }); // Aller vers la vue User
+                    }
+                    else
+                    {
+                        MessageBox.Show("Identifiant ou mot de passe incorrect");
+                    }
+                }
+                ModelState.AddModelError("", "invalid Username or Password");
+                return View();
             }
-            return View();*/
-
-            //A METTRE DANS LA VUE :
-            /*
-             @{
-                int semaineSuivante = (int)ViewBag.numsemaine +1;
-                int semainePrecedente = (int)ViewBag.numsemaine - 1;
-              }
-             */
-        //}
+        }
 
 
         // Permet de contôler l'affichage de la semaine utilisateur lorsqu'il modifie la semaine à afficher.
         // id = le numéro de la semaine à afficher.
+        [Authorize(Roles = "User")]
         public ActionResult InterfaceUser(int id)
         {
             using (DAL dal = new DAL())
-            {
-                /*
-                DateTime lundiSemaineCourante = DateExtensions.GetStartOfWeek(2020, id);
-
-                ViewBag.numsemaine = id;
-
-                ViewBag.Lundi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante);
-                ViewBag.Mardi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(1));
-                ViewBag.Mercredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(2));
-                ViewBag.Jeudi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(3));
-                ViewBag.Vendredi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(4));
-                ViewBag.Samedi = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(5));
-                ViewBag.Dimanche = dal.ListeMissionsJoursPourJourPourUser(User.Identity.Name, lundiSemaineCourante.AddDays(6));*/
-                
+            {           
 
                 DateTime lundiSemaineCourante = DateExtensions.GetStartOfWeek(2020, id);
 
@@ -123,29 +88,6 @@ namespace ProjetCRA.Controllers
             }
             return View();
         }
-
-
-        // A METTRE DANS LA VUE :
-        /*
-        @{
-            if (ViewBag.listMissionsEnCours.Count != 0)
-            {
-                var missionCode = ViewBag.listMissionsEnCours?[0]?.Code;
-                 // Afficher le bouton "Valider la journée", qui prend en id la missionCode
-            }
-        }
-        @missionCode
-
-
-        @{
-            if (ViewBag.Lundi.Count != 0)
-            {
-                var missionCode = ViewBag.Lundi?[0]?.CodeMissionJour;
-                // Afficher le bouton "Valider la journée", qui prend en id le missionCode
-            }
-        }
-
-        */
 
 
         public ActionResult Logout()

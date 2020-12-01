@@ -6,15 +6,17 @@
 
 <h2>Missions archivées</h2>
 <div>
-    <div class="table-responsive">
+    <div class="table-responsive text-center">
         <table class="table table-bordered">
             <tr>
-                <th colspan="2">Mission</th>
+                <th colspan="4">Mission</th>
                 <th colspan="3">Employé</th>
             </tr>
             <tr>
                 <th scope="col">Code</th>
                 <th scope="col">Libellé</th>
+                <th scope="col">Date de début</th>
+                <th scope="col">Date de fin</th>
                 <th scope="col">Matricule</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
@@ -27,10 +29,13 @@
 
                     <td>@data.Code</td>
                     <td>@data.Libelle</td>
+                    <td>@data.DateDebut.ToString("dd/MM/yyyy")</td>
+                    <td>@data.DateFin.ToString("dd/MM/yyyy")</td>
                     <td>@data.Matricule</td>
                     <td>@data.Nom</td>
                     <td>@data.Prenom</td>
                     <td>@data.TempsTotal</td>
+                    
 
                     <td>
                         <a href="~/Mission/DesarchiverMission/@data.Code" class="btn btn-primary">Désarchiver</a>

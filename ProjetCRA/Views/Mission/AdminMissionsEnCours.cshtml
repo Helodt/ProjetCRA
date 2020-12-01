@@ -13,7 +13,7 @@
 
 <br/>
 <div>
-    <div class="table-responsive">
+    <div class="table-responsive text-center">
         <table class="table table-bordered">
             <tr>
                 <th colspan="2">Mission</th>
@@ -38,8 +38,8 @@
                     <td>@data.Matricule</td>
                     <td>@data.Nom</td>
                     <td>@data.Prenom</td>
-                    <td>@data.DateDebut</td>
-                    <td>@data.DateFin</td>
+                    <td>@data.DateDebut.ToString("dd/MM/yyyy")</td>
+                    <td>@data.DateFin.ToString("dd/MM/yyyy")</td>
                     <td>
                         <a href="~/Mission/ModifierMission/@data.Code" class="btn btn-primary">Modifier</a>
                         <a href="~/Mission/ArchiverMission/@data.Code" class="btn btn-primary">Archiver</a>

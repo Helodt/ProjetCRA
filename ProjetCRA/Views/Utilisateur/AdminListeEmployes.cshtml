@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjetCRA.Models.EmployéMoisView
 @{
     ViewBag.Title = "AdminListeEmployes";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -6,7 +6,7 @@
 
 <h2>Liste des employés</h2>
 <div>
-    <div class="table-responsive">
+    <div class="table-responsive text-center">
         <table class="table table-bordered">
             <tr>
                 <th>Matricule</th>
@@ -16,11 +16,54 @@
 
             @foreach (var data in ViewBag.listEmployes)
             {
-                <tr>
-                    <td>@data.MATRICULE</td>
-                    <td>@data.NOM</td>
-                    <td>@data.PRENOM</td>
-                </tr>
+                if (data.ISADMIN == false)
+                {
+        <tr>
+            <td>@data.MATRICULE</td>
+            <td>@data.NOM</td>
+            <td>@data.PRENOM</td>
+
+            <td style="margin:0; padding:0">
+
+                <form method="post" action="/MissionJour/MissionsEnCoursEmploye">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                        <div class="form-group">
+                            <input id="Matricule" name="Matricule" type="hidden" value=@data.MATRICULE />
+                            <input id="Nom" name="Nom" type="hidden" value=@data.NOM />
+                            <input id="Prenom" name="Prenom" type="hidden" value=@data.PRENOM />
+                            <input id="JourMois" name="JourMois" type="hidden" value=@ViewBag.jourCourant />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Voir" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+
+
+            </td>
+
+            <td style="margin:0; padding:0">
+
+                <form method="post" action="/Utilisateur/RapportActivitéMensuel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                        <div class="form-group">
+                            <input id="Matricule" name="Matricule" type="hidden" value=@data.MATRICULE />
+                            <input id="Nom" name="Nom" type="hidden" value=@data.NOM />
+                            <input id="Prenom" name="Prenom" type="hidden" value=@data.PRENOM />
+                            <input id="JourMois" name="JourMois" type="hidden" value=@ViewBag.jourCourant />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Rapport d'activité" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+
+
+            </td>
+        </tr>
+                }
             }
         </table>
     </div>

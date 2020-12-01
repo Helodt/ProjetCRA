@@ -16,6 +16,7 @@ namespace ProjetCRA.Models
         public DateTime Jour { get; set; }
         public double Temps { get; set; }
         public string EtatMissionJour { get; set; }
+        public DateTime DateFin { get; set; }
     }
 
 }

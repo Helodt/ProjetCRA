@@ -167,8 +167,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CRA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomRoleProvider .cs" />
     <Compile Include="Models\DAL.cs" />
     <Compile Include="Models\DateView.cs" />
+    <Compile Include="Models\EmployéMoisView.cs" />
     <Compile Include="Models\MISSION.cs">
       <DependentUpon>CRA.tt</DependentUpon>
     </Compile>
@@ -208,6 +210,10 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Home\InterfaceUser.cshtml" />
     <Content Include="Views\MissionJour\AjouterMissionJour.cshtml" />
+    <Content Include="Views\MissionJour\ModifierMissionJour.cshtml" />
+    <Content Include="Views\Utilisateur\RapportActivitéMensuel.cshtml" />
+    <Content Include="Views\MissionJour\MissionsEnCoursEmploye.cshtml" />
+    <Content Include="Views\MissionJour\MissionsArchivéesEmploye.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -217,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Rapport\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

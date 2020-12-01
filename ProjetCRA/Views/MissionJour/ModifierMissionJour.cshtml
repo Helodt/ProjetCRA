@@ -1,0 +1,127 @@
+﻿@model ProjetCRA.Models.MISSIONJOUR
+
+@{
+    ViewBag.Title = "ModifierMissionJour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Modifier la mission</h2>
+<h3>Modifier</h3>
+<br />
+
+@if (Model != null)
+{
+    <div>
+        <form class="form-horizontal" action="" method="post">
+
+            <input type="hidden" class="form-control" id="IDJOUR" name="IDJOUR" value="@Model.IDJOUR">
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="MISSION_CODE">Code de la mission :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value=@Model.MISSION_CODE disabled="disabled">
+                    <input type="hidden" class="form-control" id="MISSION_CODE" name="MISSION_CODE" value=@Model.MISSION_CODE>
+                </div>
+            </div>
+
+            <input type="hidden" class="form-control" id="ETAT" name="ETAT" value=@Model.ETAT>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="JOUR">Jour :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value=@Model.JOUR disabled="disabled">
+                    <input type="hidden" class="form-control" id="JOUR" name="JOUR" value=@Model.JOUR>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="TEMPS_ACCORDE">Temps * :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="TEMPS_ACCORDE" name="TEMPS_ACCORDE" value=@Model.TEMPS_ACCORDE required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" id="ModifierMissionJour" name="ModifierMissionJour" value="Modifier" class="btn btn-primary" />
+                    @Html.ActionLink("Retour", "InterfaceUser", "Home", new { id = @ViewBag.numsemaine }, null)
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+}
+
+
+
+@*
+    <h2>Modifier la mission</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            @Html.Label("model.IDJOUR", "Id du jour", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDJOUR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IDJOUR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MISSION_CODE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MISSION_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MISSION_CODE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ETAT, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ETAT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ETAT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JOUR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JOUR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JOUR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TEMPS_ACCORDE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TEMPS_ACCORDE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TEMPS_ACCORDE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+
+*@
