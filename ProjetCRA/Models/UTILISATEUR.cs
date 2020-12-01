@@ -18,7 +18,6 @@ namespace ProjetCRA.Models
         public UTILISATEUR()
         {
             this.MISSION = new HashSet<MISSION>();
-            this.RAPPORT = new HashSet<RAPPORT>();
         }
     
         public string MATRICULE { get; set; }
@@ -29,7 +28,5 @@ namespace ProjetCRA.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MISSION> MISSION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RAPPORT> RAPPORT { get; set; }
     }
 }

@@ -26,14 +26,6 @@
           <Property Name="ETAT" Type="nchar" MaxLength="40" Nullable="false" />
           <Property Name="JOUR" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="RAPPORT">
-          <Key>
-            <PropertyRef Name="IDRAPPORT" />
-          </Key>
-          <Property Name="IDRAPPORT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UTILISATEUR_MATRICULE" Type="nchar" MaxLength="40" Nullable="false" />
-          <Property Name="MOIS" Type="date" Nullable="false" />
-        </EntityType>
         <EntityType Name="UTILISATEUR">
           <Key>
             <PropertyRef Name="MATRICULE" />
@@ -70,24 +62,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RAPPORT_UTILISATEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="RAPPORT" Type="Self.RAPPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="MATRICULE" />
-            </Principal>
-            <Dependent Role="RAPPORT">
-              <PropertyRef Name="UTILISATEUR_MATRICULE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CRA_BDDModelStoreContainer">
           <EntitySet Name="MISSION" EntityType="Self.MISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MISSIONJOUR" EntityType="Self.MISSIONJOUR" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RAPPORT" EntityType="Self.RAPPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_MISSION_UTILISATEUR" Association="Self.FK_MISSION_UTILISATEUR">
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
@@ -96,10 +73,6 @@
           <AssociationSet Name="FK_MISSIONJOUR_MISSION" Association="Self.FK_MISSIONJOUR_MISSION">
             <End Role="MISSION" EntitySet="MISSION" />
             <End Role="MISSIONJOUR" EntitySet="MISSIONJOUR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RAPPORT_UTILISATEUR" Association="Self.FK_RAPPORT_UTILISATEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="RAPPORT" EntitySet="RAPPORT" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -130,15 +103,6 @@
           <NavigationProperty Name="MISSION" Relationship="Self.FK_MISSIONJOUR_MISSION" FromRole="MISSIONJOUR" ToRole="MISSION" />
           <Property Name="TEMPS_ACCORDE" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="RAPPORT">
-          <Key>
-            <PropertyRef Name="IDRAPPORT" />
-          </Key>
-          <Property Name="IDRAPPORT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UTILISATEUR_MATRICULE" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MOIS" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="UTILISATEUR" Relationship="Self.FK_RAPPORT_UTILISATEUR" FromRole="RAPPORT" ToRole="UTILISATEUR" />
-        </EntityType>
         <EntityType Name="UTILISATEUR">
           <Key>
             <PropertyRef Name="MATRICULE" />
@@ -149,7 +113,6 @@
           <Property Name="PRENOM" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ISADMIN" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MISSION" Relationship="Self.FK_MISSION_UTILISATEUR" FromRole="UTILISATEUR" ToRole="MISSION" />
-          <NavigationProperty Name="RAPPORT" Relationship="Self.FK_RAPPORT_UTILISATEUR" FromRole="UTILISATEUR" ToRole="RAPPORT" />
         </EntityType>
         <Association Name="FK_MISSION_UTILISATEUR">
           <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="0..1" />
@@ -177,24 +140,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RAPPORT_UTILISATEUR">
-          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="RAPPORT" Type="Self.RAPPORT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UTILISATEUR">
-              <PropertyRef Name="MATRICULE" />
-            </Principal>
-            <Dependent Role="RAPPORT">
-              <PropertyRef Name="UTILISATEUR_MATRICULE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BD_CRAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MISSION" EntityType="Self.MISSION" />
           <EntitySet Name="MISSIONJOUR" EntityType="Self.MISSIONJOUR" />
-          <EntitySet Name="RAPPORT" EntityType="Self.RAPPORT" />
           <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" />
           <AssociationSet Name="FK_MISSION_UTILISATEUR" Association="Self.FK_MISSION_UTILISATEUR">
             <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
@@ -203,10 +151,6 @@
           <AssociationSet Name="FK_MISSIONJOUR_MISSION" Association="Self.FK_MISSIONJOUR_MISSION">
             <End Role="MISSION" EntitySet="MISSION" />
             <End Role="MISSIONJOUR" EntitySet="MISSIONJOUR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RAPPORT_UTILISATEUR" Association="Self.FK_RAPPORT_UTILISATEUR">
-            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
-            <End Role="RAPPORT" EntitySet="RAPPORT" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -235,15 +179,6 @@
                 <ScalarProperty Name="MISSION_CODE" ColumnName="MISSION_CODE" />
                 <ScalarProperty Name="ETAT" ColumnName="ETAT" />
                 <ScalarProperty Name="JOUR" ColumnName="JOUR" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RAPPORT">
-            <EntityTypeMapping TypeName="CRA_BDDModel.RAPPORT">
-              <MappingFragment StoreEntitySet="RAPPORT">
-                <ScalarProperty Name="IDRAPPORT" ColumnName="IDRAPPORT" />
-                <ScalarProperty Name="UTILISATEUR_MATRICULE" ColumnName="UTILISATEUR_MATRICULE" />
-                <ScalarProperty Name="MOIS" ColumnName="MOIS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

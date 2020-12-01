@@ -7,11 +7,9 @@
       <Diagram DiagramId="d9e67292422e47818fc6f6845c382c66" Name="Diagram1">
         <EntityTypeShape EntityType="CRA_BDDModel.MISSION" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CRA_BDDModel.MISSIONJOUR" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRA_BDDModel.RAPPORT" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CRA_BDDModel.UTILISATEUR" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <AssociationConnector Association="CRA_BDDModel.FK_MISSION_UTILISATEUR" ManuallyRouted="false" />
         <AssociationConnector Association="CRA_BDDModel.FK_MISSIONJOUR_MISSION" ManuallyRouted="false" />
-        <AssociationConnector Association="CRA_BDDModel.FK_RAPPORT_UTILISATEUR" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

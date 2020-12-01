@@ -181,9 +181,6 @@
     <Compile Include="Models\MissionsArchivéesView.cs" />
     <Compile Include="Models\MissionsEnCoursView.cs" />
     <Compile Include="Models\MissionsJourUserView.cs" />
-    <Compile Include="Models\RAPPORT.cs">
-      <DependentUpon>CRA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UTILISATEUR.cs">
       <DependentUpon>CRA.tt</DependentUpon>

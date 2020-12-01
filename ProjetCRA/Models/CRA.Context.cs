@@ -27,7 +27,6 @@ namespace ProjetCRA.Models
     
         public virtual DbSet<MISSION> MISSION { get; set; }
         public virtual DbSet<MISSIONJOUR> MISSIONJOUR { get; set; }
-        public virtual DbSet<RAPPORT> RAPPORT { get; set; }
         public virtual DbSet<UTILISATEUR> UTILISATEUR { get; set; }
     }
 }
