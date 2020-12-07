@@ -14,7 +14,7 @@
     <table>
         <tr>
             <td><a href=@semainePrecedente class="btn btn-secondary">Semaine précédente</a></td>
-            <td><h3>Bonne semaine !</h3></td>
+            <td><h3>   Bonne semaine !   </h3></td>
             <td><a href=@semaineSuivante class="btn btn-secondary">Semaine suivante</a></td>
         </tr>
     </table>
@@ -30,12 +30,13 @@
 
 <br />
 
+
 <div class="table-responsive">
     <table class="table table-bordered">
         @*     <table>  *@
         <tr>
-            <td style="padding:0px ; margin:0px" width="157">
-                <table width="157">
+            <td style="padding:0px ; margin:0px; text-align:center" width="157">
+                <table width="157" style="word-wrap: break-word; table-layout: fixed;">
                     <thead class="">
                         <tr>
                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.LundiDate.ToString("dddd dd"))
@@ -56,10 +57,14 @@
                                 {
                                 <tr>
                                     <td style="background-color:white ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -67,10 +72,12 @@
                             {
                                 <tr>
                                     <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -78,9 +85,12 @@
                             else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                             {
                                 <tr>
-                                    <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                    <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -88,8 +98,9 @@
                             else if (data.EtatMissionJour == "Accepté                                 ")
                             {
                                 <tr>
-                                    <td style="background-color:green ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
+                                    <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
                                     </td>
                                 </tr>
 
@@ -99,10 +110,13 @@
                             {
                                 <tr>
                                     <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -113,8 +127,8 @@
         </table>
         </td> @*FIN LUNDI !!!*@
 
-        <td style="margin:0px ; padding:0px" width="157">
-            <table width="157">
+        <td style="margin:0px ; padding:0px; text-align:center" width="157">
+            <table width="157" style="word-wrap: break-word; table-layout: fixed;">
                 <thead>
                     <tr>
                         @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.MardiDate.ToString("dddd dd"))
@@ -135,10 +149,13 @@
                             {
                             <tr>
                                 <td style="background-color:white ; margin:0px ; padding:0px">
-                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                    @data.Temps
+                                    <div class="row align-items-center justify-content-center">
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -146,10 +163,12 @@
                         {
                             <tr>
                                 <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                    @data.Temps
+                                    <div class="row align-items-center justify-content-center">
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -157,9 +176,12 @@
                         else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                         {
                             <tr>
-                                <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                    @data.Temps
+                                    <div class="row align-items-center justify-content-center">
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -167,8 +189,9 @@
                         else if (data.EtatMissionJour == "Accepté                                 ")
                         {
                             <tr>
-                                <td style="background-color:green ; margin:0px ; padding:0px">
-                                    @data.CodeMission, @data.Libelle, @data.Temps
+                                <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                    @data.Temps
                                 </td>
                             </tr>
 
@@ -178,10 +201,13 @@
                         {
                             <tr>
                                 <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                    @data.Temps
+                                    <div class="row align-items-center justify-content-center">
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -192,8 +218,8 @@
                 </table>
             </td> @* FIN MARDI !!! *@
 
-            <td style="margin:0px ; padding:0px" width="157">
-                <table width="157">
+            <td style="margin:0px ; padding:0px; text-align:center" width="157">
+                <table width="157" style="word-wrap: break-word; table-layout: fixed;">
                     <thead>
                         <tr>
                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.MercrediDate.ToString("dddd dd"))
@@ -214,10 +240,13 @@
                                 {
                                 <tr>
                                     <td style="background-color:white ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -225,10 +254,12 @@
                             {
                                 <tr>
                                     <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -236,9 +267,12 @@
                             else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                             {
                                 <tr>
-                                    <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                    <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -246,8 +280,9 @@
                             else if (data.EtatMissionJour == "Accepté                                 ")
                             {
                                 <tr>
-                                    <td style="background-color:green ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
+                                    <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
                                     </td>
                                 </tr>
 
@@ -257,10 +292,13 @@
                             {
                                 <tr>
                                     <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                        @data.Temps
+                                        <div class="row align-items-center justify-content-center">
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -271,8 +309,8 @@
                     </table>
                 </td> @* FIN MERCREDI !!!*@
 
-                <td style="margin:0px ; padding:0px" width="157">
-                    <table width="157">
+                <td style="margin:0px ; padding:0px; text-align:center" width="157">
+                    <table width="157"style="word-wrap: break-word; table-layout: fixed;">
                         <thead>
                             <tr>
                                 @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.JeudiDate.ToString("dddd dd"))
@@ -293,10 +331,13 @@
                                     {
                                     <tr>
                                         <td style="background-color:white ; margin:0px ; padding:0px">
-                                            @data.CodeMission, @data.Libelle, @data.Temps
-                                            <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                            <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                            <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                            <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                            @data.Temps
+                                            <div class="row align-items-center justify-content-center">
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -304,10 +345,12 @@
                                 {
                                     <tr>
                                         <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                            @data.CodeMission, @data.Libelle, @data.Temps
-                                            <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                            <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                            <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                            <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                            @data.Temps
+                                            <div class="row align-items-center justify-content-center">
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -315,9 +358,12 @@
                                 else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                                 {
                                     <tr>
-                                        <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                            @data.CodeMission, @data.Libelle, @data.Temps
-                                            <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                        <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                            <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                            @data.Temps
+                                            <div class="row align-items-center justify-content-center">
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -325,8 +371,9 @@
                                 else if (data.EtatMissionJour == "Accepté                                 ")
                                 {
                                     <tr>
-                                        <td style="background-color:green ; margin:0px ; padding:0px">
-                                            @data.CodeMission, @data.Libelle, @data.Temps
+                                        <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                            <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                            @data.Temps
                                         </td>
                                     </tr>
 
@@ -336,10 +383,13 @@
                                 {
                                     <tr>
                                         <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                            @data.CodeMission, @data.Libelle, @data.Temps
-                                            <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                            <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                            <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                            <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                            @data.Temps
+                                            <div class="row align-items-center justify-content-center">
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -350,8 +400,8 @@
                         </table>
                     </td> @*FIN JEUDI !!!*@
 
-                    <td style="margin:0px ; padding:0px" width="157">
-                        <table width="157">
+                    <td style="margin:0px ; padding:0px; text-align:center" width="157">
+                        <table width="157"style="word-wrap: break-word; table-layout: fixed;">
                             <thead>
                                 <tr>
                                     @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.VendrediDate.ToString("dddd dd"))
@@ -372,10 +422,13 @@
                                         {
                                         <tr>
                                             <td style="background-color:white ; margin:0px ; padding:0px">
-                                                @data.CodeMission, @data.Libelle, @data.Temps
-                                                <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                @data.Temps
+                                                <div class="row align-items-center justify-content-center">
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     }
@@ -383,10 +436,12 @@
                                     {
                                         <tr>
                                             <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                                @data.CodeMission, @data.Libelle, @data.Temps
-                                                <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                @data.Temps
+                                                <div class="row align-items-center justify-content-center">
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     }
@@ -394,9 +449,12 @@
                                     else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                                     {
                                         <tr>
-                                            <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                                @data.CodeMission, @data.Libelle, @data.Temps
-                                                <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                            <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                                <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                @data.Temps
+                                                <div class="row align-items-center justify-content-center">
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     }
@@ -404,8 +462,9 @@
                                     else if (data.EtatMissionJour == "Accepté                                 ")
                                     {
                                         <tr>
-                                            <td style="background-color:green ; margin:0px ; padding:0px">
-                                                @data.CodeMission, @data.Libelle, @data.Temps
+                                            <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                                <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                @data.Temps
                                             </td>
                                         </tr>
 
@@ -415,10 +474,13 @@
                                     {
                                         <tr>
                                             <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                                @data.CodeMission, @data.Libelle, @data.Temps
-                                                <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                @data.Temps
+                                                <div class="row align-items-center justify-content-center">
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                    <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                </div>
                                             </td>
                                         </tr>
                                     }
@@ -429,8 +491,8 @@
                             </table>
                         </td> @* FIN VENDREDI !!! *@
 
-                        <td style="margin:0px ; padding:0px" width="157">
-                            <table width="157">
+                        <td style="margin:0px ; padding:0px; text-align:center" width="157">
+                            <table width="157"style="word-wrap: break-word; table-layout: fixed;">
                                 <thead>
                                     <tr>
                                         @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.SamediDate.ToString("dddd dd"))
@@ -451,10 +513,13 @@
                                             {
                                             <tr>
                                                 <td style="background-color:white ; margin:0px ; padding:0px">
-                                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                    @data.Temps
+                                                    <div class="row align-items-center justify-content-center">
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -462,10 +527,12 @@
                                         {
                                             <tr>
                                                 <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                    @data.Temps
+                                                    <div class="row align-items-center justify-content-center">
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -473,9 +540,12 @@
                                         else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                                         {
                                             <tr>
-                                                <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                                <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                    @data.Temps
+                                                    <div class="row align-items-center justify-content-center">
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -483,8 +553,9 @@
                                         else if (data.EtatMissionJour == "Accepté                                 ")
                                         {
                                             <tr>
-                                                <td style="background-color:green ; margin:0px ; padding:0px">
-                                                    @data.CodeMission, @data.Libelle, @data.Temps
+                                                <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                    @data.Temps
                                                 </td>
                                             </tr>
 
@@ -494,10 +565,13 @@
                                         {
                                             <tr>
                                                 <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                                    @data.CodeMission, @data.Libelle, @data.Temps
-                                                    <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                    <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                    <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                    <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                    @data.Temps
+                                                    <div class="row align-items-center justify-content-center">
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                        <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -508,8 +582,8 @@
                                 </table>
                             </td> @* FIN SAMEDI !!! *@
 
-                            <td style="margin:0px ; padding:0px" width="157">
-                                <table width="157">
+                            <td style="margin:0px ; padding:0px; text-align:center" width="157">
+                                <table width="157"style="word-wrap: break-word; table-layout: fixed;">
                                     <thead>
                                         <tr>
                                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.DimancheDate.ToString("dddd dd"))
@@ -530,10 +604,13 @@
                                                 {
                                                 <tr>
                                                     <td style="background-color:white ; margin:0px ; padding:0px">
-                                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                        @data.Temps
+                                                        <div class="row align-items-center justify-content-center">
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             }
@@ -541,10 +618,12 @@
                                             {
                                                 <tr>
                                                     <td style="background-color:#FF8D22 ; margin:0px ; padding:0px">
-                                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                        @data.Temps
+                                                        <div class="row align-items-center justify-content-center">
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             }
@@ -552,9 +631,12 @@
                                             else if (@data.EtatMissionJour == "EnAttenteValidation                     ")
                                             {
                                                 <tr>
-                                                    <td style="background-color:yellow ; margin:0px ; padding:0px">
-                                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
+                                                    <td style="background-color:#FFFF58 ; margin:0px ; padding:0px">
+                                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                        @data.Temps
+                                                        <div class="row align-items-center justify-content-center">
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             }
@@ -562,8 +644,9 @@
                                             else if (data.EtatMissionJour == "Accepté                                 ")
                                             {
                                                 <tr>
-                                                    <td style="background-color:green ; margin:0px ; padding:0px">
-                                                        @data.CodeMission, @data.Libelle, @data.Temps
+                                                    <td style="background-color:#77D855 ; margin:0px ; padding:0px">
+                                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                        @data.Temps
                                                     </td>
                                                 </tr>
 
@@ -573,10 +656,13 @@
                                             {
                                                 <tr>
                                                     <td style="background-color:#DA1E00 ; margin:0px ; padding:0px">
-                                                        @data.CodeMission, @data.Libelle, @data.Temps
-                                                        <a class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">Modifier</a>
-                                                        <a class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">Supprimer</a>
-                                                        <a class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">Sauvegarder</a>
+                                                        <strong>@data.CodeMission, @data.Libelle</strong> <br />
+                                                        @data.Temps
+                                                        <div class="row align-items-center justify-content-center">
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/ModifierMissionJour/@data.CodeMissionJour">✏️</a>
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SauvegarderMissionJour/@data.CodeMissionJour">💾</a>
+                                                            <a style=" margin: 0px; padding: 8px" class="nav-link" href="~/MissionJour/SupprimerMissionJour/@data.CodeMissionJour">❌</a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             }
@@ -589,6 +675,7 @@
                                 </tr>
                                 </table>
                                 @*  </div> *@
+
 
                                 @*----------------------------------------------------------------------------------
                                     TABLEAU DES BOUTONS AJOUTER ET ENVOYER *@
@@ -608,7 +695,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -623,7 +710,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -643,7 +730,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -658,7 +745,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -678,7 +765,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -693,7 +780,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -713,7 +800,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -728,7 +815,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -748,7 +835,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -763,7 +850,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -783,7 +870,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -798,7 +885,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -818,7 +905,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                                                <input type="submit" value="Ajouter ➕" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -833,7 +920,7 @@
                                                                 <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="submit" value="Envoyer" id="missionCode" class="btn btn-primary" />
+                                                                <input type="submit" value="Envoyer 📩" id="missionCode" class="btn btn-primary" />
                                                             </div>
                                                         </div>
                                                     </form>
@@ -859,4 +946,18 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div> 
+                                </div>
+
+</div>
+
+
+<br/>
+
+<div style="margin:auto; width:400px">
+    <h3 class="text-center">Légende des missions</h3>
+    <p><span style="background-color:white; border:solid 1px black">       </span>  Mission ajoutée dans le semainier et non sauvegardée</p>
+    <p><span style="background-color:#FF8D22;">       </span>  Mission sauvegardée</p>
+    <p><span style="background-color:#FFFF58;">       </span>  Mission envoyée à validation à l'administration</p>
+    <p><span style="background-color:#77D855;">       </span>  Mission validée par un administrateur</p>
+    <p><span style="background-color:#DA1E00;">       </span>  Mission refusée par un administrateur</p>
+</div>

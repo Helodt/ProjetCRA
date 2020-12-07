@@ -8,19 +8,19 @@
 
 
 <h2>Modifier la mission</h2>
-<h3>Modifier</h3>
+<h3 class="text-center">Modifier</h3>
 <br />
 
 @if (Model != null)
 {
-    <div>
+    <div class="row align-items-center justify-content-center">
         <form class="form-horizontal" action="" method="post">
 
             <input type="hidden" class="form-control" id="IDJOUR" name="IDJOUR" value="@Model.IDJOUR">
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="MISSION_CODE">Code de la mission :</label>
-                <div class="col-sm-10">
+                <label  for="MISSION_CODE">Code de la mission :</label>
+                <div class="col-sm-12">
                     <input type="text" class="form-control" value=@Model.MISSION_CODE disabled="disabled">
                     <input type="hidden" class="form-control" id="MISSION_CODE" name="MISSION_CODE" value=@Model.MISSION_CODE>
                 </div>
@@ -29,8 +29,8 @@
             <input type="hidden" class="form-control" id="ETAT" name="ETAT" value=@Model.ETAT>
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="JOUR">Jour :</label>
-                <div class="col-sm-10">
+                <label  for="JOUR">Jour :</label>
+                <div class="col-sm-12">
                     <input type="text" class="form-control" value=@Model.JOUR disabled="disabled">
                     <input type="hidden" class="form-control" id="JOUR" name="JOUR" value=@Model.JOUR>
                 </div>
@@ -38,16 +38,16 @@
 
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="TEMPS_ACCORDE">Temps * :</label>
-                <div class="col-sm-10">
+                <label for="TEMPS_ACCORDE">Temps * :</label>
+                <div class="col-sm-12">
                     <input type="text" class="form-control" id="TEMPS_ACCORDE" name="TEMPS_ACCORDE" value=@Model.TEMPS_ACCORDE required>
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="row align-items-center justify-content-center">
                     <input type="submit" id="ModifierMissionJour" name="ModifierMissionJour" value="Modifier" class="btn btn-primary" />
-                    @Html.ActionLink("Retour", "InterfaceUser", "Home", new { id = @ViewBag.numsemaine }, null)
+                      @Html.ActionLink("Retour", "InterfaceUser", "Home", new { id = @ViewBag.numsemaine }, null)
 
                 </div>
             </div>
@@ -55,6 +55,11 @@
 
     </div>
 }
+
+<p class="font-italic text-center">
+    <br />Le temps correspondant à une mission doit être compris entre 0 et 1.
+    <br />1 correspond à la totalité de la journée.
+</p>
 
 
 

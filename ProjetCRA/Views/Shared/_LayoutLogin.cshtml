@@ -8,41 +8,31 @@
 </head>
 
 <body style="padding-top: 0px;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        @*<a class="navbar-brand" href="#">
-            @Html.ActionLink("Meliorem", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                @if (User.Identity.IsAuthenticated)
+   
+    @*
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <div class="navbar-header">
+
+                @if (Request.IsAuthenticated)
                 {
+                    if (@ViewBag.isAdmin)
+                    {
+                        @Html.ActionLink("Retour", "AdminListeEmployes", "Utilisateur", null, new { @class = "navbar-brand" })
 
-                    <li>@User.Identity.Name</li>
-
-                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link text-center text-uppercase" })</li>
-
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Retour", "InterfaceUser", "Home", new { id = @ViewBag.numSemaine }, new { @class = "navbar-brand" })
+                    }
                 }
-                else
-                {
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
+            </div>
+        </div>
+    </div>*@
 
-                    <li>@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+    </div>
 
-                    <li>@Html.ActionLink("Register", "Register", "Home", new { @class = "nav-link float-left" })</li>
-
-                    <li>@Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link float-left" })</li>
-
-
-
-                }
-            </ul>
-
-
-        </div>*@
-    </nav>
 
     <div class="container body-content">
         @RenderBody()

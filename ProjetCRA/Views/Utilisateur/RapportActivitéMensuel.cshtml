@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Rapport d'activité mensuel</h2>
+<h2 class="text-center">Rapport d'activité mensuel</h2>
 
 <div class="row align-items-center justify-content-center">
     <table>
@@ -26,7 +26,7 @@
                 </form>
             </td>
 
-            <td style="text-transform: capitalize;"><h3>@ViewBag.MoisActuel</h3></td>
+            <td style="text-transform: capitalize;"><h3>   @ViewBag.MoisActuel   </h3></td>
             <td>
                 <form method="post" action="/Utilisateur/RapportActivitéMensuel">
                     <div asp-validation-summary="ModelOnly" class="text-danger">
@@ -61,36 +61,49 @@
 
 
 
-<br/>
-<b>Missions du mois :</b> <br/>
+<br />
+<h5>Missions du mois :</h5>
 
-<div>
-    <div class="table-responsive">
-        <table class="table table-bordered">
+@{
+    if (ViewBag.ListeMissionsMois.Count != 0)
+    {
 
-            <tr>
-                <th scope="col">Code</th>
-                <th scope="col">Libellé</th>
-                <th scope="col">Temps total</th>
-            </tr>
+        <div>
+            <div class="table-responsive text-center">
+                <table class="table table-bordered">
 
-            @foreach (var data in ViewBag.ListeMissionsMois)
-            {
-                <tr>
+                    <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Libellé</th>
+                        <th scope="col">Temps total</th>
+                    </tr>
 
-                    <td>@data.Code</td>
-                    <td>@data.Libelle</td>
-                    <td>@data.TempsTotal</td>
+                    @foreach (var data in ViewBag.ListeMissionsMois)
+                    {
+                        <tr>
 
-                </tr>
-            }
+                            <td>@data.Code</td>
+                            <td>@data.Libelle</td>
+                            <td>@data.TempsTotal</td>
 
-
-        </table>
-    </div>
-
-</div>
+                        </tr>
+                    }
 
 
-<br/>
-<a href="~/Utilisateur/AdminListeEmployes" class="btn btn-default">Retour</a>
+                </table>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        if (@ViewBag.MoisActuel == "octobre" || @ViewBag.MoisActuel == "avril" || @ViewBag.MoisActuel == "août")
+        { <p class="font-italic text-center">Aucune mission réalisée durant le mois d'<span style="text-transform: capitalize;">@ViewBag.MoisActuel. </span></p>}
+    else
+    { <p class="font-italic text-center">Aucune mission réalisée durant le mois de <span style="text-transform: capitalize;">@ViewBag.MoisActuel. </span></p> }
+
+}
+}
+
+<br />
+<a href="~/Utilisateur/AdminListeEmployes" class="btn btn-primary">Retour</a>
