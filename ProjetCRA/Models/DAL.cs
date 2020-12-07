@@ -142,6 +142,36 @@ namespace ProjetCRA.Models
         }
         #endregion
 
+        #region Archiver toutes les MISSIONS terminées
+        // Passe l'état de toutes les missions dont la date de fin est inférieur à la date actuelle à "Archivé".
+        public bool ArchiverTout()
+        {
+            DateTime dateAjd = DateTime.Now; // Récupérer la date d'aujourd'hui
+
+            // Récupérer toutes les MISSION qui n'ont pas l'etat "Archivé" et dont la date de fin est supérieur à la date du jour
+            var query = from m in db.MISSION
+                        where m.DATE_FIN < dateAjd
+                        where m.ETAT != "Archivé"
+                        select m;
+
+            // Faire passer l'état de toutes les missions à "Archivé"
+            foreach (MISSION m in query)
+            {
+                m.ETAT = "Archivé";
+            }
+
+            try
+            {
+                db.SaveChanges(); // Sauvegarder les changements
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
+
         #region Listes des MISSIONS archivées
         // Renvoie la liste des missions archivées
         public List<MissionsArchivéesView> ListeMissionsArchivées()
@@ -403,6 +433,7 @@ namespace ProjetCRA.Models
             }
         }
         #endregion
+
         #endregion
 
 
@@ -874,8 +905,7 @@ namespace ProjetCRA.Models
 
 
 
-
-
+        
 
 
 

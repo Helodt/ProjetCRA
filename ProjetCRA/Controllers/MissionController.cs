@@ -86,19 +86,31 @@ namespace ProjetCRA.Controllers
         [HttpPost]
         public ActionResult ModifierMission(MISSION mission)
         {
-            try
+            using (DAL dal = new DAL())
             {
-                if (ModelState.IsValid) // Si le modèle de donnée est valide
+                try
                 {
-                    db.Entry(mission).State = EntityState.Modified; // Modification de la mission dans la BDD
-                    db.SaveChanges(); // Enregistrer les modifications de la BDD
+                    if (ModelState.IsValid) // Si le modèle de donnée est valide
+                    {
+                        if (mission.DATE_DEBUT < mission.DATE_FIN) // La modification de la mission est correcte
+                        {
+                            db.Entry(mission).State = EntityState.Modified; // Modification de la mission dans la BDD
+                            db.SaveChanges(); // Enregistrer les modifications de la BDD
+                        } else // La modification de la mission n'est pas correcte : la date de début est ultérieure à la date de fin
+                        {
+                            string idMission = String.Concat(mission.CODE.Where(c => !Char.IsWhiteSpace(c))); // Récupérer l'identifiant de la mission
+                            MessageBox.Show("La mission n'a pas pu être modifiée : données invalides", "Erreur"); // Afficher un message d'erreur
+                            return RedirectToAction($"ModifierMission/{idMission}", "Mission", null); // Rediriger vers la vue de la modification de la mission
+                        }
+
+                    }
+                    return RedirectToAction("AdminMissionsEnCours");
                 }
-                return RedirectToAction("AdminMissionsEnCours");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("La mission n'a pas pu être modifiée", "Echec");
-                return RedirectToAction("AdminMissionsEnCours");
+                catch (Exception e)
+                {
+                    MessageBox.Show("La mission n'a pas pu être modifiée", "Echec");
+                    return RedirectToAction("AdminMissionsEnCours");
+                }
             }
         }
         #endregion
@@ -126,6 +138,25 @@ namespace ProjetCRA.Controllers
             {
                 if (!dal.ArchiverMission(id)) MessageBox.Show("La mission n'a pas pu être archivée", "Echec"); // Archiver la mission et si elle n'a pas été archivée : affichage d'un message d'erreur
                 return RedirectToAction("AdminMissionsEnCours");
+            }
+        }
+        #endregion
+
+        #region Archiver toutes les missions (côté Admin)
+        public ActionResult ArchiverTout()
+        // Archiver toutes les missions terminées (=dont la date de fin est inférieur à la date du jour)
+        {
+            using (DAL dal = new DAL())
+            {
+                // Demander confirmation à l'utilisateur
+                DialogResult dialogResult = MessageBox.Show("Souhaitez-vous archiver toutes les missions qui sont terminées ?", "Confirmation", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes) // Si l'utilisateur confirme :
+                {
+                    Boolean toutArchive = dal.ArchiverTout(); // Archivage des missions et récupérer dans un booléen si les missions ont été correctement archivées
+                    if (!toutArchive) MessageBox.Show("Echec lors de l'archivage des missions terminées", "Echec"); // Si les missions n'ont pas été correctement archivées, affichage d'un message d'erreur
+                }
+                return RedirectToAction("AdminMissionsEnCours"); // Retourner sur la page des missions en cours
             }
         }
         #endregion
@@ -158,6 +189,7 @@ namespace ProjetCRA.Controllers
         }
         #endregion
         #endregion
+
     }
 
 
