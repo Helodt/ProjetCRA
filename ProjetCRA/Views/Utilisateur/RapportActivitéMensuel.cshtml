@@ -62,11 +62,12 @@
 
 
 <br />
-<h5>Missions du mois :</h5>
+<h5><b>Missions du mois :</b></h5>
 
 @{
     if (ViewBag.ListeMissionsMois.Count != 0)
     {
+        double res = 0;
 
         <div>
             <div class="table-responsive text-center">
@@ -87,13 +88,28 @@
                             <td>@data.TempsTotal</td>
 
                         </tr>
+                        res += @data.TempsTotal;
                     }
 
 
                 </table>
             </div>
 
+
         </div>
+
+        <div class="table-responsive text-center">
+            @if (res >= 0 && res <= 1)
+            {
+                <h6><b>Nombre de jour travaillé : </b>@res</h6>
+            }
+            else
+            {
+                <h6><b>Nombre de jours travaillés : </b>@res</h6>
+            }
+        </div>
+
+
     }
     else
     {

@@ -1,27 +1,25 @@
 ﻿@model ProjetCRA.Models.DateView
 @{ ViewBag.Title = "InterfaceUser";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @{ int semaineSuivante = (int)ViewBag.numsemaine + 1;
-                int semainePrecedente = (int)ViewBag.numsemaine - 1; }
+    int semainePrecedente = (int)ViewBag.numsemaine - 1; }
 
 
 <div class="row align-items-center justify-content-center">
     <table>
         <tr>
-            <td><a href=@semainePrecedente class="btn btn-secondary">Semaine précédente</a></td>
+            <td><a href=@semainePrecedente class="btn btn-secondary"><span style="font-size:18px">⇽ </span>Semaine précédente</a></td>
             <td><h3>   Bonne semaine !   </h3></td>
-            <td><a href=@semaineSuivante class="btn btn-secondary">Semaine suivante</a></td>
+            <td><a href=@semaineSuivante class="btn btn-secondary">Semaine suivante <span style="font-size:18px">⇾</span></a></td>
         </tr>
     </table>
 </div>
 
-<div class="row align-items-center justify-content-center">
-    <h6>Vous êtes actuellement dans la semaine du @ViewBag.LundiDate.ToString("dd/MM/yyyy") au @ViewBag.DimancheDate.ToString("dd/MM/yyyy")</h6>
-</div>
+
 
 <div class="row align-items-center justify-content-center">
-    <p>@DateTime.Now.ToString("dddd, dd MMMM yyyy"), @DateTime.Now.ToString("HH:mm:ss")</p>
+    <p>Aujourd'hui, nous sommes le <b><span style="text-transform: capitalize;">@DateTime.Now.ToString("dddd, dd MMMM yyyy")</span></b></p>
 </div>
 
 <br />
@@ -37,10 +35,10 @@
                         <tr>
                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.LundiDate.ToString("dddd dd"))
                             {
-                <th style="background-color:lightseagreen">Lundi @ViewBag.LundiDate.ToString("dd")</th> }
+                <th style="background-color:lightseagreen">Lundi @ViewBag.LundiDate.ToString("dd/MM")</th> }
                             else
                             {
-                <th style="background-color:lightgrey">Lundi @ViewBag.LundiDate.ToString("dd")</th>}
+                <th style="background-color:lightgrey">Lundi @ViewBag.LundiDate.ToString("dd/MM")</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -129,10 +127,10 @@
                     <tr>
                         @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.MardiDate.ToString("dddd dd"))
                         {
-            <th style="background-color:lightseagreen">Mardi @ViewBag.MardiDate.ToString("dd")</th> }
+            <th style="background-color:lightseagreen">Mardi @ViewBag.MardiDate.ToString("dd/MM")</th> }
                         else
                         {
-            <th style="background-color:lightgrey">Mardi @ViewBag.MardiDate.ToString("dd")</th>}
+            <th style="background-color:lightgrey">Mardi @ViewBag.MardiDate.ToString("dd/MM")</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -221,10 +219,10 @@
                         <tr>
                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.MercrediDate.ToString("dddd dd"))
                             {
-                <th style="background-color:lightseagreen">Mercredi @ViewBag.MercrediDate.ToString("dd")</th> }
+                <th style="background-color:lightseagreen">Mercredi @ViewBag.MercrediDate.ToString("dd/MM")</th> }
                             else
                             {
-                <th style="background-color:lightgrey">Mercredi @ViewBag.MercrediDate.ToString("dd")</th>}
+                <th style="background-color:lightgrey">Mercredi @ViewBag.MercrediDate.ToString("dd/MM")</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -313,10 +311,10 @@
                             <tr>
                                 @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.JeudiDate.ToString("dddd dd"))
                                 {
-                    <th style="background-color:lightseagreen">Jeudi @ViewBag.JeudiDate.ToString("dd")</th> }
+                    <th style="background-color:lightseagreen">Jeudi @ViewBag.JeudiDate.ToString("dd/MM")</th> }
                                 else
                                 {
-                    <th style="background-color:lightgrey">Jeudi @ViewBag.JeudiDate.ToString("dd")</th>}
+                    <th style="background-color:lightgrey">Jeudi @ViewBag.JeudiDate.ToString("dd/MM")</th>}
                             </tr>
                         </thead>
                         <tbody>
@@ -405,10 +403,10 @@
                                 <tr>
                                     @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.VendrediDate.ToString("dddd dd"))
                                     {
-                        <th style="background-color:lightseagreen">Vendredi @ViewBag.VendrediDate.ToString("dd")</th> }
+                        <th style="background-color:lightseagreen">Vendredi @ViewBag.VendrediDate.ToString("dd/MM")</th> }
                                     else
                                     {
-                        <th style="background-color:lightgrey">Vendredi @ViewBag.VendrediDate.ToString("dd")</th>}
+                        <th style="background-color:lightgrey">Vendredi @ViewBag.VendrediDate.ToString("dd/MM")</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -497,10 +495,10 @@
                                     <tr>
                                         @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.SamediDate.ToString("dddd dd"))
                                         {
-                            <th style="background-color:lightseagreen">Samedi @ViewBag.SamediDate.ToString("dd")</th> }
+                            <th style="background-color:lightseagreen">Samedi @ViewBag.SamediDate.ToString("dd/MM")</th> }
                                         else
                                         {
-                            <th style="background-color:lightgrey">Samedi @ViewBag.SamediDate.ToString("dd")</th>}
+                            <th style="background-color:lightgrey">Samedi @ViewBag.SamediDate.ToString("dd/MM")</th>}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -589,10 +587,10 @@
                                         <tr>
                                             @if (@DateTime.Now.ToString("dddd dd") == @ViewBag.DimancheDate.ToString("dddd dd"))
                                             {
-                                <th style="background-color:lightseagreen">Dimanche @ViewBag.DimancheDate.ToString("dd")</th> }
+                                <th style="background-color:lightseagreen">Dimanche @ViewBag.DimancheDate.ToString("dd/MM")</th> }
                                             else
                                             {
-                                <th style="background-color:lightgrey">Dimanche @ViewBag.DimancheDate.ToString("dd")</th>}
+                                <th style="background-color:lightgrey">Dimanche @ViewBag.DimancheDate.ToString("dd/MM")</th>}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -932,23 +930,27 @@
                                 </table>
 
 
-                                @*----- Bouton pré-initiliser la semaine -----*@
-                                <div class="row align-items-center justify-content-center">
-                                    <form method="post" action="/MissionJour/PreinitialiserSemaine">
-                                        <div asp-validation-summary="ModelOnly" class="text-danger">
 
-                                            <div class="form-group">
-                                                <input id="DateJour" name="DateJour" type="hidden" value=@ViewBag.LundiDate />
-                                                <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="submit" value="Pré-initialiser semaine" id="missionCode" class="btn btn-primary" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-     
+
                             </div>
+
+
+                            @*----- Bouton pré-initiliser la semaine -----*@
+                            <div class="row align-items-center justify-content-center">
+                                <form method="post" action="/MissionJour/PreinitialiserSemaine">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                                        <div class="form-group">
+                                            <input id="DateJour" name="DateJour" type="hidden" value=@ViewBag.LundiDate />
+                                            <input id="Matricule" name="Matricule" type="hidden" value=@User.Identity.Name />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Pré-initialiser semaine" id="missionCode" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <hr />
 
 
                             <br />

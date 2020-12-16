@@ -29,10 +29,7 @@ namespace ProjetCRA.Controllers
                 // Vérifier que l'utilisateur est déjà authentifié :
                 if (Request.IsAuthenticated) // Si l'utilisateur est déjà authentifié
                 {
-                    /*ViewBag.isAdmin = dal.RecupererRole(@User.Identity.Name); // Stocker dans le viewBag le rôle de l'utilisateur
-                    ViewBag.numSemaine = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday); // Stocker dans le ViewBag le numéro de la semaine courante
-                    */
-
+                    // Vérifier le rôle de l'utilisateur :
                     bool isAdmin = dal.RecupererRole(@User.Identity.Name);
                     if (isAdmin == true) return RedirectToAction("AdminListeEmployes", "Utilisateur"); // Si l'utilisateur est un admin : rediriger l'user vers l'interface Admin
 
@@ -118,6 +115,15 @@ namespace ProjetCRA.Controllers
         }
         #endregion
 
-        
+        #region Afficher l'aide (côté User)
+        // Permet d'afficher l'aide dans l'interface User : affiche les instructions d'utilisation de son semainier
+        public ActionResult AideInterfaceUser(int id)
+        {
+            // Afficher le message d'aide :
+            MessageBox.Show("• Cliquez sur le bouton \"Ajouter +\" sous le jour de la semaine auquel vous voulez ajouter une mission. \n\n• Choisissez une mission parmi la liste des missions disponibles pour le jour sélectionné ainsi que le temps que vous pensez y accorder. Cliquez sur \"Ajouter\" pour que la mission soit ajoutée. \n\n• Votre mission apparaît dans le semainier en couleur blanche. \n\n• Si vous souhaitez modifier une mission, cliquez sur l'icône crayon, qui vous permettra de modifier le champs \"Temps accordé\". \n\n• Si vous souhaitez sauvegarder une mission, cliquez sur l'icône disquette. La mission s'affichera en orange. \n\n• Si vous souhaitez supprimer une mission, cliquez sur l'icône croix. \n\n• Cliquez sur le bouton \"Envoyer\" sous le jour de la semaine correspondant aux missions que vous souhaitez envoyer pour validation à l'administrateur. \n\n• Le bouton \"Pré-initialiser semaine\" vous permet de dupliquer les missions affichées sur la semaine précédente.", "Aide");
+            return RedirectToAction("InterfaceUser", "Home", new { id = id }); // Retourner sur la semaine où l'utilisateur se situait
+        }
+        #endregion
+
     }
 }
